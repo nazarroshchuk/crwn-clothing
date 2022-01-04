@@ -15,6 +15,9 @@ export const Header = () => (
             <NavLink className='option' to='contact'>
                 CONTACT
             </NavLink>
+            <NavLink className='option' to='sign-in'>
+                SIGN
+            </NavLink>
         </div>
     </div>
 )
