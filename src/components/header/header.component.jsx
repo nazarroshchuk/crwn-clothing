@@ -2,8 +2,9 @@ import React from "react";
 import './header.styles.scss'
 import {Link, NavLink} from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
+import {auth} from "../../firebase/firebase.utils";
 
-export const Header = () => (
+export const Header = (props) => (
     <div className='header'>
         <Link to={'/'}>
             <Logo className='logo'/>
@@ -15,9 +16,13 @@ export const Header = () => (
             <NavLink className='option' to='contact'>
                 CONTACT
             </NavLink>
-            <NavLink className='option' to='sign-in'>
-                SIGN
-            </NavLink>
+            {
+                props.currentUser
+                    ?  <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
+                    :   <NavLink className='option' to='sign-in'>
+                            SING IN
+                        </NavLink>
+            }
         </div>
     </div>
 )

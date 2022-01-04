@@ -8,6 +8,7 @@ export const FormInput = ({ label, onChange, ...props}) => (
            className='form-input'
            onChange={onChange}
            {...props}
+           autoComplete='true'
        />
        {
            label &&

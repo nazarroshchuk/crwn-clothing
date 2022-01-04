@@ -49,14 +49,16 @@ export class SignIn extends Component {
                         label='Pasword'
                     />
 
-                    <Button type='submit'>
-                        SIGN IN
-                    </Button>
-                    <Button onClick={signWithGoogle}>
-                        {''}
-                        SIGN WITH GOOGLE
-                        {''}
-                    </Button>
+                   <div className='buttons'>
+                       <Button type='submit'>
+                           SIGN IN
+                       </Button>
+                       <Button onClick={signWithGoogle} isGoogleSignIn>
+                           {''}
+                           SIGN WITH GOOGLE
+                           {''}
+                       </Button>
+                   </div>
                 </form>
 
             </div>
