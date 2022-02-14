@@ -18,7 +18,7 @@ export const Header = (props) => (
             </NavLink>
             {
                 props.currentUser
-                    ?  <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
+                    ?   <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
                     :   <NavLink className='option' to='sign-in'>
                             SING IN
                         </NavLink>

@@ -1,38 +1,58 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import { HomePage } from "./pages/homepage/homepage.component";
 import { Route, Switch } from 'react-router-dom';
 import { ShopPage } from "./pages/shop/shop.component";
 import { Header } from "./components/header/header.component";
-import { SignInSighUp } from "./pages/sign-in-sigh-up/sign-in-sigh-up.component";
-import {auth} from "./firebase/firebase.utils";
+import { SignInAndSignUpPage } from "./pages/sign-in-sigh-up/sign-in-and-sigh-up.component";
+import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 
+class App extends React.Component {
+    constructor() {
+        super();
 
-function App() {
-    const [currentUser, setCurrentUser] = useState(null);
+        this.state = {
+            currentUser: null
+        };
+    }
 
-    useEffect(() => {
-        const unsubscribeFromAuth = auth.onAuthStateChanged( user => {
-            console.log(user)
-            setCurrentUser(user)
-        })
-        return () => {
-            unsubscribeFromAuth()
-            console.log('unsubscribe')
-        }
+    unsubscribeFromAuth = null;
 
-    }, [])
+    componentDidMount() {
+        //check all time or user exist in database
+        this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => { // all time will return actual user
+            if (userAuth) {
+                const userRef = await createUserProfileDocument(userAuth);
+                // the documentSnapshot object allows us to check if a document exists -->
+                // at this query using the .exist property with returns a boolean
+                // we can also get the actual properties on the object by calling the .data() method, -->
+                // which returns us a JSON object of the document
+                userRef.onSnapshot(snapShot => {
+                    this.setState({
+                        currentUser: {id: snapShot.id, ...snapShot.data()}
+                    }, ()=>console.log(this.state))
+                })
+            }
+            this.setState({ currentUser: null })
+        });
+    }
 
-  return (
-    <div>
-        <Header currentUser={currentUser}/>
-         <Switch>
-             <Route exact path='/' component={HomePage} />
-             <Route exact path='/shop' component={ShopPage} />
-             <Route exact path='/sign-in' component={SignInSighUp} />
-         </Switch>
-    </div>
-  );
+    componentWillUnmount() {
+        this.unsubscribeFromAuth();
+    }
+
+    render() {
+        return (
+            <div>
+                <Header currentUser={this.state.currentUser} />
+                <Switch>
+                    <Route exact path='/' component={HomePage} />
+                    <Route path='/shop' component={ShopPage} />
+                    <Route path='/sign-in' component={SignInAndSignUpPage} />
+                </Switch>
+            </div>
+        );
+    }
 }
 
 export default App;
