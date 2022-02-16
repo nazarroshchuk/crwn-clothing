@@ -1,4 +1,4 @@
-import { userActionsType } from "./user.actions-type";
+import { userActionTypes } from "./user.action-types";
 
 export const userActions = {
     setCurrentUser,
@@ -6,7 +6,7 @@ export const userActions = {
 
 function setCurrentUser(user) {
     return {
-        type: userActionsType.SET_CURRENT_USER,
+        type: userActionTypes.SET_CURRENT_USER,
         payload: { user },
     }
 }
