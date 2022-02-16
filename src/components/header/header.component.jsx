@@ -5,28 +5,30 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import {auth} from "../../firebase/firebase.utils";
 import {connect} from "react-redux";
 
-export const Header = (props) => (
-    <div className='header'>
-        <Link to={'/'}>
-            <Logo className='logo'/>
-        </Link>
-        <div className='options'>
-            <NavLink className='option' to='shop'>
-                SHOP
-            </NavLink>
-            <NavLink className='option' to='contact'>
-                CONTACT
-            </NavLink>
-            {
-                props.currentUser
-                    ?   <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
-                    :   <NavLink className='option' to='sign-in'>
-                            SING IN
-                        </NavLink>
-            }
-        </div>
-    </div>
-)
+const Header = (props) => {
+  return (
+      <div className='header'>
+          <Link to={'/'}>
+              <Logo className='logo'/>
+          </Link>
+          <div className='options'>
+              <NavLink className='option' to='shop'>
+                  SHOP
+              </NavLink>
+              <NavLink className='option' to='contact'>
+                  CONTACT
+              </NavLink>
+              {
+                  props.currentUser
+                      ? <div className='option' onClick={() => auth.signOut()}>SIGN OUT</div>
+                      : <NavLink className='option' to='sign-in'>
+                          SING IN
+                      </NavLink>
+              }
+          </div>
+      </div>
+  )
+}
 
 const mapStateToProps = state => {
     return {
