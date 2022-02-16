@@ -1,13 +1,12 @@
 import React from 'react';
 
 import './menu-item.styles.scss';
-import { useLocation, useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 const MenuItem = ({ title, imageUrl, size }) => {
-    const history = useHistory()
-    const location = useLocation()
-    const match = useRouteMatch()
-    console.log(location)
+    const history = useHistory();
+    const match = useRouteMatch();
+
     return (
         <div
             className={`${size} menu-item`}

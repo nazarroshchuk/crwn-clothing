@@ -1,3 +1,7 @@
+// Whenever we call the onAuthStateChanged() or onSnapshot() methods from our auth  library or referenceObject, -->
+// we get back a function that lets us unsubscribe from the listener we just instantiated. -->
+// We should use to call that unsubscribe method
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
