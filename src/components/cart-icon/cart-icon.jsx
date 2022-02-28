@@ -7,7 +7,7 @@ import { cartActions } from "../../redux/cart/cart.actions";
 
 const CartIcon = () => {
     const dispatch = useDispatch();
-    const cartItems = useSelector(state => state.cart.cartItems);
+    const cartItemsAmount = useSelector(state => state.cart.cartItems.reduce((acc,obj) => acc + obj.amount, 0));
 
     return (
         <div
@@ -16,7 +16,7 @@ const CartIcon = () => {
         >
             <ShoppingIcon className='shopping-icon' />
             <span className='item-count'>
-                {cartItems.length ? cartItems.reduce((acc,obj) => acc + obj.amount, 0) : 0}
+                {cartItemsAmount}
             </span>
         </div>
     )

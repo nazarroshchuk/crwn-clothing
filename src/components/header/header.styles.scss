@@ -3,16 +3,23 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 25px;
+  position: fixed;
+  background-color: white;
+  z-index: 100;
+  padding: 60px 40px;
+  margin: 0 auto;
+  left:0;
+  top:0;
 
   .logo-container {
     height: 100%;
     width: 70px;
-    padding: 25px;
   }
 
   .options {
-    width: 50%;
+    width: 40%;
     height: 100%;
     display: flex;
     align-items: center;

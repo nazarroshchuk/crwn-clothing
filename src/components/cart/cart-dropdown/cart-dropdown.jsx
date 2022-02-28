@@ -4,6 +4,7 @@ import './cart-dropdown.styles.scss';
 import { Button } from "../../button/button.component";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../redux/cart/cart.actions";
+import {CartItem} from "../../cart-item/cart-item.component";
 
 const CartDropdown = () => {
     const hidden = useSelector(state => state.cart.hidden);
@@ -16,14 +17,16 @@ const CartDropdown = () => {
 
     return (
         <div className='cart-dropdown'>
-            <div className='cart-items' />
+            <div className='cart-items'>
             {cartItemsList.map(el => (
-                <div key={el.name}>
-                    <span onClick={() => dispatch(cartActions.removeCartItem(el))}>-</span>
-                    <p >{el.price}</p>
-                    <span onClick={() => dispatch(cartActions.addCartItem(el))}>+</span>
-                </div>
+                <CartItem
+                    item={el}
+                    key={el.id}
+                    addItem={() => dispatch(cartActions.addCartItem(el))}
+                    removeItem={() => dispatch(cartActions.removeCartItem(el))}
+                />
             ))}
+            </div>
             <Button>GO TO CHECKOUT</Button>
         </div>
     )
