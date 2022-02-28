@@ -2,6 +2,7 @@ import {cartActionTypes} from "./cart.action-types";
 
 const INITIAL_STATE = {
     hidden: true,
+    cartItems: [],
 }
 
 export const cartReducer = (state = INITIAL_STATE, action) => {
@@ -11,7 +12,39 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 hidden: !state.hidden,
             }
+        case cartActionTypes.ADD_CART_ITEM:
+            return {
+                ...state,
+                cartItems: addItem(action.payload.item, state.cartItems)
+            }
+        case cartActionTypes.REMOVE_CART_ITEM:
+            return {
+                ...state,
+                cartItems: removeItem(action.payload.item, state.cartItems),
+            }
         default:
             return state;
     }
 }
+
+function addItem(item, listItems) {
+    const existItem = listItems.find(el => el.name === item.name);
+    if (existItem) {
+       return listItems.map(cartItem =>
+           cartItem.id === item.id
+                ? { ...cartItem, amount: cartItem.amount + 1 }
+                : cartItem
+       )
+    }
+
+    return [...listItems, {...item, amount: 1}];
+}
+
+function removeItem(item, listItems) {
+    return listItems.map(cartItem =>
+        cartItem.id === item.id
+            ? { ...cartItem, amount: cartItem.amount - 1 }
+            : cartItem
+        ).filter(el => el.amount)
+    }
+
