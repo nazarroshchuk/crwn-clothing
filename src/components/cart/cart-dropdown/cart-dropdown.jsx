@@ -4,11 +4,12 @@ import './cart-dropdown.styles.scss';
 import { Button } from "../../button/button.component";
 import { useDispatch, useSelector } from "react-redux";
 import { cartActions } from "../../../redux/cart/cart.actions";
-import {CartItem} from "../../cart-item/cart-item.component";
+import { CartItem } from "../../cart-item/cart-item.component";
+import {selectCartHidden, selectCartItems} from "../../../redux/cart/cart.selectors";
 
 const CartDropdown = () => {
-    const hidden = useSelector(state => state.cart.hidden);
-    const cartItemsList = useSelector(state => state.cart.cartItems);
+    const hidden = useSelector(selectCartHidden);
+    const cartItemsList = useSelector(selectCartItems);
     const dispatch = useDispatch();
 
     if (hidden) {
