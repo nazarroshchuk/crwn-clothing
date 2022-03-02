@@ -16,10 +16,10 @@ const Header = (props) => {
               <Logo className='logo'/>
           </Link>
           <div className='options'>
-              <NavLink className='option' to='shop'>
+              <NavLink className='option' to='/shop'>
                   SHOP
               </NavLink>
-              <NavLink className='option' to='contact'>
+              <NavLink className='option' to='/contact'>
                   CONTACT
               </NavLink>
               {

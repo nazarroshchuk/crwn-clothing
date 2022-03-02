@@ -1,7 +1,6 @@
 import React from "react";
 import './cart-item.styles.scss'
-import {IoAddCircleOutline, IoIosRemoveCircleOutline} from "react-icons/all";
-
+import { IoAddCircleOutline, IoIosRemoveCircleOutline } from "react-icons/all";
 export const CartItem = ({ addItem, removeItem, item: { imageUrl, name, price, amount } }) => {
     return (
         <div className="cart-item">
