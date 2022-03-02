@@ -4,6 +4,7 @@ export const cartActions = {
     toggleCartDropdown,
     addCartItem,
     removeCartItem,
+    deleteCartItem,
 }
 
 function toggleCartDropdown() {
@@ -23,5 +24,12 @@ function removeCartItem(item) {
     return {
         type: cartActionTypes.REMOVE_CART_ITEM,
         payload: { item },
+    }
+}
+
+function deleteCartItem(id) {
+    return {
+        type: cartActionTypes.DELETE_CART_ITEM,
+        payload: {id}
     }
 }

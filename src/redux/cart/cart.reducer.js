@@ -22,13 +22,18 @@ export const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: removeItem(action.payload.item, state.cartItems),
             }
+        case cartActionTypes.DELETE_CART_ITEM:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter(el => el.id !== action.payload.id)
+            }
         default:
             return state;
     }
 }
 
 function addItem(item, listItems) {
-    const existItem = listItems.find(el => el.name === item.name);
+    const existItem = listItems.find(el => el.id === item.id);
     if (existItem) {
        return listItems.map(cartItem =>
            cartItem.id === item.id

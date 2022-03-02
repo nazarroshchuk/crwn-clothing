@@ -18,6 +18,11 @@ const CartDropdown = () => {
         return null;
     }
 
+    const handleCheckout = () => {
+        history.push('/checkout');
+        dispatch(cartActions.toggleCartDropdown())
+    }
+
     return (
         <div className='cart-dropdown'>
             <div className='cart-items'>
@@ -33,7 +38,7 @@ const CartDropdown = () => {
                 : <span className='empty-message'>Your cart is empty</span>
             }
             </div>
-            <Button onClick={() => history.push('/checkout')}>GO TO CHECKOUT</Button>
+            <Button onClick={handleCheckout}>GO TO CHECKOUT</Button>
         </div>
     )
 }
