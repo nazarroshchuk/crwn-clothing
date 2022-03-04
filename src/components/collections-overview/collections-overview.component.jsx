@@ -1,16 +1,16 @@
 import React from "react";
 import './collections-overview.styles.scss';
 import { useSelector } from "react-redux";
-import { selectDirectoryCollections } from "../../redux/shop/shop.selector";
+import { selectCollectionsForPreview } from "../../redux/shop/shop.selector";
 import { CollectionPreview } from "../preview-collection/collection-preview.component";
 
 export const CollectionsOverview = () => {
-    const collections = useSelector(selectDirectoryCollections);
+    const collections = useSelector(selectCollectionsForPreview);
 
     return (
         <div className='collections-overview'>
-            {collections.map(({id, ...collection}) => (
-                <CollectionPreview key={id} {...collection} />
+            {collections.map((el) => (
+                <CollectionPreview key={el.id} {...el} />
             ))}
         </div>
     )
